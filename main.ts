@@ -1,3 +1,3 @@
-import { solve } from "./solutions/day1.ts";
+import { solve } from "./solutions/day2.ts";
 
-console.log(solve())
+console.log(solve());
