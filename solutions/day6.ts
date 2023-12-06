@@ -40,10 +40,10 @@ function part1(races: Race[]) {
 }
 
 function part2(races: Race[]) {
-  const raceTime = Number(races.map((r) => r.time).join(""));
-  const raceDistance = Number(races.map((r) => r.distance).join(""));
+  const time = Number(races.map((r) => r.time).join(""));
+  const distance = Number(races.map((r) => r.distance).join(""));
 
-  return countWinningHoldDurations({ time: raceTime, distance: raceDistance });
+  return countWinningHoldDurations({ time, distance });
 }
 
 export function solve() {
@@ -66,6 +66,5 @@ export function solve() {
     distance,
   }));
 
-  console.log({ races });
   return `Part 1: ${part1(races)}\nPart 2: ${part2(races)}`;
 }
