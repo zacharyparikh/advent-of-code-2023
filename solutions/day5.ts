@@ -1,5 +1,4 @@
-import { by } from '../util/by.ts';
-import { range } from '../util/range.ts';
+import { by } from "../util/by.ts";
 
 type Mapping = {
   destinationStart: number;
@@ -7,7 +6,7 @@ type Mapping = {
   rangeLength: number;
 };
 
-type Range = Omit<Mapping, 'destinationStart'>;
+type Range = Omit<Mapping, "destinationStart">;
 
 type Almanac = {
   seeds: number[];
@@ -76,14 +75,15 @@ function part2(almanac: Almanac) {
 
       const findOverlap = (range: Range) => {
         const mappingEnd = range.sourceStart + (range.rangeLength - 1);
-        const sourceEnd = sourceRange.sourceStart + (sourceRange.rangeLength - 1);
+        const sourceEnd =
+          sourceRange.sourceStart + (sourceRange.rangeLength - 1);
 
         const overlapStart = Math.max(
           range.sourceStart,
           sourceRange.sourceStart
         );
         const overlapEnd = Math.min(mappingEnd, sourceEnd);
-        const overlapLength = (overlapEnd - overlapStart) + 1
+        const overlapLength = overlapEnd - overlapStart + 1;
 
         if (overlapLength <= 0) {
           return null;
@@ -159,31 +159,29 @@ function part2(almanac: Almanac) {
   */
 
   console.log({ sourceRanges });
-  
+
   for (const map of almanac.maps) {
     sourceRanges = sourceRanges.flatMap(
       mapSourceRangeToDestinationRanges(map.mappings)
     );
     console.log({ ...map, sourceRanges });
-    
   }
 
-
-  return Math.min(...sourceRanges.map((r) => r.sourceStart))
+  return Math.min(...sourceRanges.map((r) => r.sourceStart));
 }
 
 export function solve() {
-  const text = Deno.readTextFileSync('inputs/day5.test.txt');
-  const [seedsText, ...mapsText] = text.split('\n\n');
+  const text = Deno.readTextFileSync("inputs/day5.test.txt");
+  const [seedsText, ...mapsText] = text.split("\n\n");
 
-  const seeds = seedsText.replace('seeds: ', '').split(' ').map(Number);
+  const seeds = seedsText.replace("seeds: ", "").split(" ").map(Number);
   const maps = mapsText.map((mapText) => {
-    const [title, ...mappingTexts] = mapText.split('\n').filter(Boolean);
-    const [source, destination] = title.replace(' map:', '').split('-to-');
+    const [title, ...mappingTexts] = mapText.split("\n").filter(Boolean);
+    const [source, destination] = title.replace(" map:", "").split("-to-");
 
     const mappings = mappingTexts.map((mappingText) => {
       const [destinationStart, sourceStart, rangeLength] = mappingText
-        .split(' ')
+        .split(" ")
         .map(Number);
       return { destinationStart, sourceStart, rangeLength };
     });
