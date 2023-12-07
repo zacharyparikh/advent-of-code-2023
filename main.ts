@@ -1,4 +1,4 @@
-import { solve } from "./solutions/day6.ts";
+import { solve } from "./solutions/day7.ts";
 
 Deno.bench("Solve", () => {
   solve();
